@@ -11,10 +11,13 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+from ConfigParser import RawConfigParser
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+config = RawConfigParser()
+config.read(os.path.join(BASE_DIR, 'tinflix/settings.ini'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -27,6 +30,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SOCIAL_AUTH_FACEBOOK_KEY = config.get('secrets', 'SOCIAL_AUTH_FACEBOOK_KEY')
+SOCIAL_AUTH_FACEBOOK_SECRET = config.get('secrets', 'SOCIAL_AUTH_FACEBOOK_SECRET')
 
 # Application definition
 
@@ -38,8 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'social.apps.django_app.default',
     'django.contrib.staticfiles',
-    'tinflixer',
-    'movie'
+    'tinflixer.apps.TinflixerConfig',
+    'movie.apps.MovieConfig'
 ]
 TEMPLATE_CONTEXT_PROCESSORS = (
 	'django.contrib.auth.context_processors.auth',
@@ -52,6 +57,29 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 	'social.apps.django_app.context_processors.backends',
 	'social.apps.django_app.context_processors.login_redirect',
 	)
+
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+    'tinflixer.pipeline.create_tinflixer'  #Custom pipeline
+)
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+  'locale': 'ru_RU',
+  'fields': 'id, name, email, age_range, picture'
+}
+
+LOGIN_REDIRECT_URL = '/'
 
 AUTHENTICATION_BACKENDS = (
 	'social.backends.facebook.FacebookOAuth2',
@@ -94,11 +122,14 @@ WSGI_APPLICATION = 'tinflix.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'tinflix',
+        'USER': config.get('database','DATABASE_USER'),
+        'PASSWORD': config.get('database', 'DATABASE_PASSWORD'),
+        'HOST': config.get('database','DATABASE_HOST'),
+        'PORT': '',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators

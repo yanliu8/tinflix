@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url, include, patterns
 from django.contrib import admin
+
 admin.autodiscover()
 urlpatterns = patterns('',
-	url(r'', include('social.apps.django_app.urls', namespace = 'social')),
-    url(r'^$', 'tinflixer.views.index'),
-    url(r'^admin/', include(admin.site.urls)),
-)
+                       url(r'', include('social.apps.django_app.urls', namespace='social')),
+                       url(r'', include('django.contrib.auth.urls', namespace='auth')),
+                       url(r'^$', 'tinflixer.views.index'),
+                       url('^admin/', include(admin.site.urls)),
+                       )
