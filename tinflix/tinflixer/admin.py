@@ -3,7 +3,15 @@ from tinflixer.models import Tinflixer
 # Register your models here.
 class TinflixerAdmin(admin.ModelAdmin):
     list_display = ['user',
-                    'gender']
+                    'gender',
+                    'low_age',
+                    'high_age',
+                    'real_age',
+                    'longtitude',
+                    'latitude',
+                    'picture',
+                    'about_me',
+                    'sex_orin']
 
 
 admin.site.register(Tinflixer, TinflixerAdmin)
