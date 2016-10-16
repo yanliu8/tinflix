@@ -7,11 +7,11 @@ class TinflixerAdmin(admin.ModelAdmin):
                     'low_age',
                     'high_age',
                     'real_age',
-                    'longtitude',
-                    'latitude',
+                    'city',
+                    'state',
                     'picture',
                     'about_me',
-                    'sex_orin']
+                    ]
 
 
 admin.site.register(Tinflixer, TinflixerAdmin)

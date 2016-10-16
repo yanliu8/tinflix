@@ -12,15 +12,17 @@ class Tinflixer(models.Model):
     #add custom features here
     gender = models.CharField(max_length=20, null=True, blank=True,
                               choices=GENDERS)
+    first_name = models.CharField(max_length=20, default='first name')
+    last_name = models.CharField(max_length=20, default='last name')
+    new = models.BooleanField(blank=False, default=True)
+    email = models.CharField(max_length=30, default="example@example.com")
     low_age = models.IntegerField(blank=True, null=True)
     high_age = models.IntegerField(blank=True, null=True)
     real_age = models.IntegerField(blank=True, null=True)
-    location = models.TextField(blank=True, null=True)
-    longtitude = models.FloatField(blank=True, null=True)
-    latitude = models.FloatField(blank=True, null=True)
+    city = models.CharField(max_length=15, blank=True, null=True)
+    state = models.CharField(max_length=15, blank=True, null=True)
     picture = models.URLField(blank=True, null=True)  # test empty facebook profile pic
     about_me = models.TextField(blank=True, null=True)
-    sex_orin = models.CharField(max_length=20, null=True, blank=True, choices=GENDERS)
 
 
 class Liked_Movie(models.Model):
