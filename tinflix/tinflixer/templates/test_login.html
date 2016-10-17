@@ -1,7 +1,12 @@
-{% block main %}
+ {% block main %}
+<html>
+    <head>
+        <meta charset="utf"/>
+        <title> Test</title>
+        <link rel="stylesheet" href="position.css"/>
+    </head>
  <div>
  <h1>Third-party authentication demo</h1>
-
  <p>
    <ul>
    {% if user and not user.is_anonymous %}
@@ -13,10 +18,22 @@
      </li>
    {% else %}
      <li>
-       <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Login with Facebook</a>
+       <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" style="text-decoration:none">
+          <P><font size="6" face="Fantasy" color="grey">
+             <div style="
+             text-align:right;
+             width:px;
+             border:0px ;
+             position:fixed;
+             top:130px;
+             right:100px;
+             background-color: blue">Login with Facebook 
+             </div></font></P>
+       </a>
      </li>
    {% endif %}
    </ul>
  </p>
  </div>
+ </html>
 {% endblock %}
