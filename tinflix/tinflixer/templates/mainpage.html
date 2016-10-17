@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf"/>
+        <title> Test</title>
+        <link rel="stylesheet" href="main.css"/>
+    </head>
+    
+    <menu>
+        <div id="nav">
+            <ul>
+                <a href="test.html"><font color="grey">HOME</font></a>
+                    <a href="http://www.imdb.com/"><font color="grey">MOVIES</font></a>
+                    <a href=""><font color="grey">MEMBERS</font></a>
+                    <a href="https://wiki.illinois.edu/wiki/display/cs411fa16ss/Tinflixer%3A+Tinflix"><font color="grey">CONTACT</font></a>
+            </ul> 
+        </div>
+        <img>
+    </menu>
+    
+    <body>
+      <div id="login">
+        <ul>
+          <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" style="text-decoration:none">
+             <font size="6" color="grey">
+             <div style="
+             position:absolute;
+             top:135px;
+             right:80px;">Login with Facebook 
+             </div></font>
+          </a>
+        </ul>
+      </div>
+    </body>
+        <gallery-left>
+        
+        <div class="gallery-left">
+            <div class="img-single">
+                <img src="1.jpg">
+            </div>
+        </div>
+        <div class="gallery-left">
+            <div class="img-single">
+                <img src="2.jpg">
+            </div>
+        </div>
+        <div class="gallery-left">
+            <div class="img-single">
+                <img src="3.jpg">
+            </div>
+        </div>
+        
+    </gallery-left>
+    
+    <gallery-middle>
+        
+        <div class="gallery-middle">
+            <div class="img-single">
+                <img src="4.jpg">
+            </div>
+            <div class="img-single">
+                <img src="5.jpg">
+            </div>
+            <div class="img-single">
+                <img src="6.jpg">
+            </div>
+        </div>
+        
+    </gallery-middle>
+    
+    <gallery-right>
+        
+        <div class="gallery-right">
+            <div class="img-single">
+                <img src="7.jpg">
+            </div>
+            <div class="img-single">
+                <img src="8.jpg">
+            </div>
+            <div class="img-single">
+                <img src="9.jpg">
+            </div>
+        </div>
+        
+    </gallery-right>
+
+</html>
