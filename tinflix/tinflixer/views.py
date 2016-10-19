@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render_to_response, redirect, render
 from django.template.context import RequestContext
 from tinflixer.models import Tinflixer
 # Create your views here.
@@ -10,10 +10,14 @@ def index(request):
     if not request.user or not request.user.is_authenticated():
         return render_to_response("test_login.html", context)
     obj = Tinflixer.objects.get(user=request.user)
-    
+    context = RequestContext(request,
+                             {'request': request,
+                              'user': request.user,
+                              'tinflixer': obj})
     if obj.new:
         # request.user.new = False
-        return redirect("/signup/")
+
+        return redirect("/signup/", tinflixer=obj)
     return render_to_response("test_login.html", context)
 
 
@@ -33,4 +37,4 @@ def signup(request):
                              {'request': request,
                               'user': request.user,
                               'tinflixer': obj})
-    return render_to_response("test_signup.html", context, RequestContext(request))
+    return render(request, "test_signup.html", context)
