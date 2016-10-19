@@ -15,7 +15,7 @@ from ConfigParser import RawConfigParser
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 config = RawConfigParser()
 config.read(os.path.join(BASE_DIR, 'tinflix/settings.ini'))
 
@@ -53,6 +53,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 	'django.core.context_processors.media',
 	'django.core.context_processors.static',
 	'django.core.context_processors.tz',
+	'django.core.context_processors.crsf',
 	'django.contrib.messages.context_processors.messages',
 	'social.apps.django_app.context_processors.backends',
 	'social.apps.django_app.context_processors.login_redirect',

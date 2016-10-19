@@ -10,13 +10,10 @@ def index(request):
     if not request.user or not request.user.is_authenticated():
         return render_to_response("test_login.html", context)
     obj = Tinflixer.objects.get(user=request.user)
-    context = RequestContext(request,
-                             {'request': request,
-                              'user': request.user,
-                              'tinflixer': obj})
+    
     if obj.new:
         # request.user.new = False
-        return render_to_response("test_signup.html", context)
+        return redirect("/signup/")
     return render_to_response("test_login.html", context)
 
 
@@ -30,4 +27,10 @@ def signup(request):
         tinflixer_obj.gender = request.POST.get('gender')
         tinflixer_obj.about_me = request.POST.get('about_me')
         tinflixer_obj.save()
-        return redirect(index)
+        return redirect("/")
+    obj = Tinflixer.objects.get(user=request.user)
+    context = RequestContext(request,
+                             {'request': request,
+                              'user': request.user,
+                              'tinflixer': obj})
+    return render_to_respone("test_signup.html", context, context_instance=RequestContext(request))

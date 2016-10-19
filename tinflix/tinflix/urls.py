@@ -23,5 +23,5 @@ urlpatterns = [
                url(r'', include('django.contrib.auth.urls', namespace='auth')),
                url(r'^$', tinflixer.views.index),
                url('^admin/', include(admin.site.urls)),
-    url(r'^signup/$', tinflixer.views.signup)
+    	       url(r'^signup/$', tinflixer.views.signup)
                ]
