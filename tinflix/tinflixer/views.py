@@ -33,4 +33,4 @@ def signup(request):
                              {'request': request,
                               'user': request.user,
                               'tinflixer': obj})
-    return render_to_respone("test_signup.html", context, context_instance=RequestContext(request))
+    return render_to_response("test_signup.html", context, RequestContext(request))
