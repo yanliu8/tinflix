@@ -4,7 +4,7 @@ from django.db import models
 
 # Create your models here.
 class Movie(models.Model):
-    movie_id = models.IntegerField(primary_key=True)
+    movie_id = models.AutoField(primary_key=True)
     name = models.TextField(blank=True, null=True)
     release_date = models.TextField(blank=True, null=True)
     rating = models.TextField(blank=True, null=True)
