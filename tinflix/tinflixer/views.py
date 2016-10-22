@@ -8,7 +8,7 @@ def index(request):
                              {'request' : request,
                               'user' : request.user})
     if not request.user or not request.user.is_authenticated():
-        return render_to_response("test_login.html", context)
+        return render_to_response("mainpage.html", context)
     obj = Tinflixer.objects.get(user=request.user)
     context = RequestContext(request,
                              {'request': request,
@@ -18,7 +18,7 @@ def index(request):
         # request.user.new = False
 
         return redirect("/signup/", tinflixer=obj)
-    return render_to_response("test_login.html", context)
+    return render_to_response("mainpage.html", context)
 
 
 def signup(request):

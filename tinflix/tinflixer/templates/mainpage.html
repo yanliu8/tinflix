@@ -3,50 +3,71 @@
     <head>
         <meta charset="utf"/>
         <title> Test</title>
-        <link rel="stylesheet" href="main.css"/>
+        <link rel="stylesheet" href="static/main.css"/>
     </head>
     
     <menu>
         <div id="nav">
             <ul>
-                <a href="test.html"><font color="grey">HOME</font></a>
+                <a href="/"><font color="grey">HOME</font></a>
                     <a href="http://www.imdb.com/"><font color="grey">MOVIES</font></a>
                     <a href=""><font color="grey">MEMBERS</font></a>
                     <a href="https://wiki.illinois.edu/wiki/display/cs411fa16ss/Tinflixer%3A+Tinflix"><font color="grey">CONTACT</font></a>
             </ul> 
         </div>
+        <div id="stage4">
+            <ul>
+                <a href="/stage4"><font color="grey">STAGE 4 DEMO PAGE</font></a>
+            </ul>
+        </div>
         <img>
     </menu>
     
     <body>
-      <div id="login">
+    {% if user and not user.is_anonymous %}
+    <div id="logout">
         <ul>
-          <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" style="text-decoration:none">
+            <a href="{% url 'auth:logout' %}?next={{ request.path }}">
              <font size="6" color="grey">
              <div style="
              position:absolute;
              top:135px;
-             right:80px;">Login with Facebook 
+             right:80px;">Logout
              </div></font>
           </a>
         </ul>
       </div>
+    {% else %}
+    <div id="login">
+        <ul>
+            <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" style="text-decoration:none">
+                <font size="6" color="grey">
+                    <div style="
+             position:absolute;
+             top:135px;
+             right:80px;">Login with Facebook
+                    </div>
+                </font>
+            </a>
+        </ul>
+    </div>
+    {% endif %}
     </body>
         <gallery-left>
         
         <div class="gallery-left">
             <div class="img-single">
-                <img src="1.jpg">
+                <img src="static/1.jpg">
             </div>
         </div>
         <div class="gallery-left">
             <div class="img-single">
-                <img src="2.jpg">
+                <img src="static/2.jpg">
             </div>
         </div>
         <div class="gallery-left">
             <div class="img-single">
-                <img src="3.jpg">
+                <img src="static/3.jpg">
             </div>
         </div>
         
@@ -56,13 +77,13 @@
         
         <div class="gallery-middle">
             <div class="img-single">
-                <img src="4.jpg">
+                <img src="static/4.jpg">
             </div>
             <div class="img-single">
-                <img src="5.jpg">
+                <img src="static/5.jpg">
             </div>
             <div class="img-single">
-                <img src="6.jpg">
+                <img src="static/6.jpg">
             </div>
         </div>
         
@@ -72,13 +93,13 @@
         
         <div class="gallery-right">
             <div class="img-single">
-                <img src="7.jpg">
+                <img src="static/7.jpg">
             </div>
             <div class="img-single">
-                <img src="8.jpg">
+                <img src="static/8.jpg">
             </div>
             <div class="img-single">
-                <img src="9.jpg">
+                <img src="static/9.jpg">
             </div>
         </div>
         

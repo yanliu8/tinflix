@@ -16,12 +16,15 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 import tinflixer.views
-
+import movie.views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 admin.autodiscover()
 urlpatterns = [
                url(r'', include('social.apps.django_app.urls', namespace='social')),
                url(r'', include('django.contrib.auth.urls', namespace='auth')),
                url(r'^$', tinflixer.views.index),
                url('^admin/', include(admin.site.urls)),
-    	       url(r'^signup/$', tinflixer.views.signup)
+    url(r'^signup/$', tinflixer.views.signup),
+    url(r'^stage4/$', movie.views.stage4),
                ]
+urlpatterns += staticfiles_urlpatterns()

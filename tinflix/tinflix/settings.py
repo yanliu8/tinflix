@@ -59,6 +59,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 	'social.apps.django_app.context_processors.login_redirect',
 	)
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "tinflixer/static/")
+]
 SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.social_details',
     'social.pipeline.social_auth.social_uid',
