@@ -24,7 +24,7 @@ urlpatterns = [
                url(r'', include('django.contrib.auth.urls', namespace='auth')),
                url(r'^$', tinflixer.views.index),
                url('^admin/', include(admin.site.urls)),
-    url(r'^signup/$', tinflixer.views.signup),
-    url(r'^stage4/$', movie.views.stage4),
+    url('^signup/$', tinflixer.views.signup),
+    url('^stage4/$', movie.views.stage4),
                ]
 urlpatterns += staticfiles_urlpatterns()
