@@ -16,7 +16,7 @@ def stage4(request):
 
 def search(request):
     if request.method == 'GET':
-        name = request.GET.get('name')
+        name = request.GET.get('q')
         if not name:
             raise Http404
         try:
@@ -37,16 +37,10 @@ def search(request):
                                  {'request': request,
                                   'user': request.user,
                                   'movie': result})
-        return render(request, 'detail.html', context)
+        return render(request, 'search.html', context)
 
 
 def index(request):
-    if request.method == 'GET':
-        q = request.GET['search']
-
-        # return render(request, 'search.html', context)
-
-    else:
-        context = RequestContext(request,
-                                 {'request': request, })
-        return render(request, 'movie.html', context)
+    context = RequestContext(request,
+                             {'request': request, })
+    return render(request, 'movie.html', context)
