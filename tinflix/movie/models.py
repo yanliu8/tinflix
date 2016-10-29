@@ -13,3 +13,8 @@ class Movie(models.Model):
     poster = models.URLField(blank=True, null=True)
     duration = models.TextField(blank=True, null=True)
     plot = models.TextField(blank=True, null=True)
+
+
+class Similar(models.Model):
+    movie_1 = models.ForeignKey('Movie', related_name='%(app_label)s_%(class)s_movie1')
+    movie_2 = models.ForeignKey('Movie', related_name='%(app_label)s_%(class)s_movie2')
