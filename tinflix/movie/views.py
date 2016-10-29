@@ -23,6 +23,11 @@ def search(request):
             result = Movie.objects.get(name=name)
         except Movie.DoesNotExist:
             api_result = omdb.title(name)
+            if not api_result:
+                context = RequestContext(request,
+                                         {'request': request,
+                                          'movie': None})
+                return render(request, 'search.html', context)
             new_movie_obj = Movie(name=name)
             new_movie_obj.plot = api_result['plot'].encode('utf-8')
             new_movie_obj.duration = api_result['runtime'].encode('utf-8')
@@ -35,7 +40,6 @@ def search(request):
             result = new_movie_obj
         context = RequestContext(request,
                                  {'request': request,
-                                  'user': request.user,
                                   'movie': result})
         return render(request, 'search.html', context)
 

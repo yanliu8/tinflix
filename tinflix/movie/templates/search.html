@@ -5,7 +5,7 @@
     <title>search</title>
 </head>
 <body>
-
+{% if movie %}
 <li>
     movie name = {{ movie.name }}
 </li>
@@ -25,5 +25,10 @@
 <li>
     <img src="{{ movie.poster }}" alt="Mountain View">
 </li>
+{% else %}
+    <li>
+        movie not found
+    </li>
+{% endif %}
 </body>
 </html>
