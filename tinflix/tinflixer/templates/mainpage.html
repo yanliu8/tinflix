@@ -2,28 +2,12 @@
 <html>
     <head>
         <meta charset="utf"/>
-        <title> Test</title>
-        <link rel="stylesheet" href="static/main.css"/>
+        <title> tinflix</title>
+        <link rel="stylesheet" href="static/template.css"/>
+        <link rel="stylesheet" href="static/parallax.css"/>
+        <link rel="stylesheet" href="static/imgeff.css"/>
     </head>
-    
-    <menu>
-        <div id="nav">
-            <ul>
-                <a href="/"><font color="grey">HOME</font></a>
-                <a href="/movie"><font color="grey">MOVIES</font></a>
-                    <a href=""><font color="grey">MEMBERS</font></a>
-                    <a href="https://wiki.illinois.edu/wiki/display/cs411fa16ss/Tinflixer%3A+Tinflix"><font color="grey">CONTACT</font></a>
-            </ul> 
-        </div>
-        <div id="stage4">
-            <ul>
-                <a href="/stage4"><font color="grey">STAGE 4 DEMO PAGE</font></a>
-            </ul>
-        </div>
-        <img>
-    </menu>
-    
-    <body>
+
     {% if user and not user.is_anonymous %}
     <div id="logout">
         <ul>
@@ -52,9 +36,46 @@
         </ul>
     </div>
     {% endif %}
-    </body>
+
+    <parallax>
+        <div class="parallax-group">
+            <img class="back1" src="static/background1.jpg" alt="">
+            <h1>Tinder & Netflix</h1>
+        <menu>
+            <nav id="nav">
+            <a class="link" href="tinflix.html">HOME</a>
+            <a class="link" href="movies">MOVIES</a>
+            <a class="link" href="#column_background">CONTACT</a>
+            <a class="link" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">LOGIN</a>
+            <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" style="text-decoration:none"></a>
+            </nav>
+        </menu>
+            <header class="front1">
+                <div class="img-background">
+                    <img src="static/logo.JPG" />
+                </div>
+            </header>
+            <div class="column_container">
+
+                <div class="column_left" >
+                    <h2>ABOUT US</h2>
+                    <p>I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double click me to add your own content and make changes to the font. I’m a great place for you to tell a story and let your users know a little more about you.</p>
+                    <div class="space"></div>
+                </div>
+                <div class="column_background"></div>
+
+
+
+
+                <img class="back2" src="static/background2.JPG" alt="">
+            </div>
+            <header class="front2"></header>
+        </div>
+    </parallax>
+
+
         <gallery-left>
-        
+
         <div class="gallery-left">
             <div class="img-single">
                 <img src="static/1.jpg">
@@ -70,11 +91,11 @@
                 <img src="static/3.jpg">
             </div>
         </div>
-        
-    </gallery-left>
-    
-    <gallery-middle>
-        
+
+        </gallery-left>
+
+        <gallery-middle>
+
         <div class="gallery-middle">
             <div class="img-single">
                 <img src="static/4.jpg">
@@ -86,11 +107,11 @@
                 <img src="static/6.jpg">
             </div>
         </div>
-        
-    </gallery-middle>
-    
-    <gallery-right>
-        
+
+        </gallery-middle>
+
+        <gallery-right>
+
         <div class="gallery-right">
             <div class="img-single">
                 <img src="static/7.jpg">
@@ -102,7 +123,7 @@
                 <img src="static/9.jpg">
             </div>
         </div>
-        
-    </gallery-right>
+
+        </gallery-right>
 
 </html>
