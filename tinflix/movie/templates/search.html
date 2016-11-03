@@ -5,7 +5,8 @@
     <title>search</title>
 </head>
 <body>
-{% if movie %}
+{% if movies %}
+    {% for movie in movies %}
 <li>
     movie name = {{ movie.name }}
 </li>
@@ -22,9 +23,16 @@
 <li>
     genre = {{ movie.genre }}
 </li>
+        <li>
+            release date = {{ movie.release_date }}
+        </li>
+        <li>
+            popularity = {{ movie.popularity }}
+        </li>
 <li>
-    <img src="{{ movie.poster }}" alt="Mountain View">
+    <img src="{{ movie.poster }}" alt="No poster">
 </li>
+    {% endfor %}
 {% else %}
     <li>
         movie not found

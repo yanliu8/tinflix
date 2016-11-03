@@ -22,7 +22,7 @@ class Tinflixer(models.Model):
     city = models.CharField(max_length=15, blank=True, null=True)
     state = models.CharField(max_length=15, blank=True, null=True)
     picture = models.URLField(blank=True, null=True)  # test empty facebook profile pic
-    about_me = models.TextField(blank=True, null=True)
+    about_me = models.CharField(max_length=100, blank=True, null=True)
 
 
 class Liked_Movie(models.Model):
