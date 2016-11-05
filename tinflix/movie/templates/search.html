@@ -3,35 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <title>search</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function like(id) {
+            $.ajax({
+                url: "/movie/ajax/like",
+                type: "POST",
+                data: ({'movie': id}),
+                success: function (content) {
+
+                    var old_text = document.getElementById(id).innerText;
+                    if (old_text == "like") {
+                        document.getElementById(id).innerText = "dislike";
+                    }
+                    else {
+                        document.getElementById(id).innerText = "like";
+                    }
+
+                }
+            })
+            return false;
+        }
+    </script>
 </head>
 <body>
 {% if movies %}
-    {% for movie in movies %}
+    {% for movie_obj in movies %}
 <li>
-    movie name = {{ movie.name }}
+    movie name = {{ movie_obj.movie.name }}
 </li>
 <li>
-    plot = {{ movie.plot }}
+    plot = {{ movie_obj.movie.plot }}
 </li>
 <li>
-    duration = {{ movie.duration }}
+    duration = {{ movie_obj.movie.duration }}
 </li>
 <li>
-    rating = {{ movie.rating }}
+    rating = {{ movie_obj.movie.rating }}
 </li>
 
 <li>
-    genre = {{ movie.genre }}
+    genre = {{ movie_obj.movie.genre }}
 </li>
         <li>
-            release date = {{ movie.release_date }}
+            release date = {{ movie_obj.movie.release_date }}
         </li>
         <li>
-            popularity = {{ movie.popularity }}
+            popularity = {{ movie_obj.movie.popularity }}
         </li>
 <li>
-    <img src="{{ movie.poster }}" alt="No poster">
+    <img src="{{ movie_obj.movie.poster }}" alt="No poster">
 </li>
+        <li>
+            {% csrf_token %}
+            {% if not movie_obj.like %}
+                <button type="button" id="{{ movie_obj.movie.movie_id }}" onclick="like(this.id)">like</button>
+            {% else %}
+                <button type="button" id="{{ movie_obj.movie.movie_id }}" onclick="like(this.id)">dislike</button>
+            {% endif %}
+        </li>
     {% endfor %}
 {% else %}
     <li>

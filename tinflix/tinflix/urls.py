@@ -26,7 +26,8 @@ urlpatterns = [
                url('^admin/', include(admin.site.urls)),
     url('^signup$', tinflixer.views.signup),
     url('^stage4$', movie.views.stage4),
-    url('^movie$', movie.views.index),
-    url('^movie/search', movie.views.search)
+    url('^movies$', movie.views.index),
+    url('^movie/ajax/like$', movie.views.like_by_search),
+    url('^movie/search', movie.views.search),
                ]
 urlpatterns += staticfiles_urlpatterns()

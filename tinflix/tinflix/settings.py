@@ -84,6 +84,7 @@ SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
 }
 
 LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/'
 
 AUTHENTICATION_BACKENDS = (
 	'social.backends.facebook.FacebookOAuth2',
