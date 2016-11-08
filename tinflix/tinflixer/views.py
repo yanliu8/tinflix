@@ -23,7 +23,7 @@ def index(request):
     if obj.new:
         # request.user.new = False
 
-        return redirect("/signup/", tinflixer=obj)
+        return redirect("/signup", tinflixer=obj)
     return render_to_response("mainpage.html", context)
 
 

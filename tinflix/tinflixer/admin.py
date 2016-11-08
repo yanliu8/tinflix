@@ -1,5 +1,5 @@
 from django.contrib import admin
-from tinflixer.models import Tinflixer
+from tinflixer.models import *
 # Register your models here.
 class TinflixerAdmin(admin.ModelAdmin):
     list_display = ['user',
@@ -14,5 +14,10 @@ class TinflixerAdmin(admin.ModelAdmin):
                     ]
 
 
-admin.site.register(Tinflixer, TinflixerAdmin)
+class Liked_MovieAdmin(admin.ModelAdmin):
+    list_display = ['user',
+                    'movie']
 
+
+admin.site.register(Tinflixer, TinflixerAdmin)
+admin.site.register(Liked_Movie, Liked_MovieAdmin)
