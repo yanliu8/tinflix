@@ -1,0 +1,83 @@
+a {
+	text-decoration: none;
+	color: #00936E;
+}
+
+a:hover {
+	color: #006D59;
+}
+
+.card {
+	height: 300px;
+	width: 200px;
+	position: relative;
+	top: -60vh;
+    left: -30vh;
+	display: block;
+	margin: 0 auto;
+	font-weight: 700;
+}
+
+.profile {
+	z-index: 300;
+	width: 100%;
+	background: none;
+	height: 150px;
+}
+
+.profile img {
+	width: 90px;
+  height: 90px;
+  border-radius: 50%;
+	border-right: 25px;
+	top: 1.25em;
+	position: relative;
+	display: block;
+	margin: 0 auto;
+	z-index: 100;
+	}
+.name {
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+	position: relative;
+	top:-12%;
+	font-size: 1.1em;
+}
+
+.infoForm {
+	z-index: 300;
+        bottom: 170px;
+        left: 280px;
+        position: relative;
+	background: none;
+	height: 150px;
+}
+
+.infoForm2 {
+	z-index: 300;
+        bottom: 320px;
+        left: 550px;
+        color: red;
+        position: relative;
+	background: none;
+	height: 150px;
+}
+
+.b{
+	text-decoration: none;
+	color: #00936E;
+	font-size:120%
+}
+
+.submitButton {
+	z-index: 300;
+        top: 60px;
+        left: 60px;
+        color: red;
+        position: relative;
+	background: none;
+	height: 150px;
+}
+
+

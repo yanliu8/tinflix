@@ -1,0 +1,93 @@
+body{
+    background-size: 110% 110%;
+    background-image: url("memberbackground.PNG");
+    background-repeat: no-repeat;
+    background-color: #330000;
+    background-attachment: fixed;
+}
+
+h1 {
+  background: #330000;
+    opacity: 0.75;
+    margin-top: 200px;
+    margin-bottom: -30px;
+    width: 72%;
+    margin-left: 20%;
+    padding: 60px 0px 60px 0px;
+    font-size: 120%;
+    font-family: arial black;
+  text-align: center;
+  color: white;
+}
+
+h2 {
+  background: #330000;
+    opacity: 0.75;
+    margin-top: -60px;
+    margin-bottom: 0px;
+    width: 72%;
+    margin-left: 20%;
+    padding: 60px 0px 60px 0px;
+    font-size: 120%;
+    font-family: arial black;
+  text-align: center;
+  color: white;
+}
+
+.minibackground1{
+    margin-top: 30px;
+    width: 72%;
+    padding-bottom: 400px;
+    margin-left: 20%;
+    background: #330000;
+}
+
+.minibackground2{
+    width: 72%;
+    height: 100%;
+    margin-top: 0px;
+    padding-top: 160px;
+    margin-left: 20%;
+    background: #330000;
+}
+
+.minibackground3{
+    width: 72%;
+    margin-top: 200px;
+    padding-top: 700px;
+    margin-left: 20%;
+    background: #330000;
+}
+
+ul {
+    list-style-type: none;
+    margin-top: -200px;
+    margin-left: -8px;
+    padding: 0;
+    width: 20%;
+    background-color: #212121;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+
+li a {
+    font-family: arial black;
+    display: block;
+    color: white;
+    padding: 28px 16px;
+    text-decoration: none;
+}
+
+li a.menuimg {
+}
+
+li a.active {
+    background-color: #330000;
+    color: white;
+}
+
+li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
