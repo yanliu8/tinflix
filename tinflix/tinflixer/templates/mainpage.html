@@ -8,34 +8,6 @@
         <link rel="stylesheet" href="static/imgeff.css"/>
     </head>
 
-    {% if user and not user.is_anonymous %}
-    <div id="logout">
-        <ul>
-            <a href="{% url 'auth:logout' %}?next={{ request.path }}">
-             <font size="6" color="grey">
-             <div style="
-             position:absolute;
-             top:135px;
-             right:80px;">Logout
-             </div></font>
-          </a>
-        </ul>
-      </div>
-    {% else %}
-    <div id="login">
-        <ul>
-            <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" style="text-decoration:none">
-                <font size="6" color="grey">
-                    <div style="
-             position:absolute;
-             top:135px;
-             right:80px;">Login with Facebook
-                    </div>
-                </font>
-            </a>
-        </ul>
-    </div>
-    {% endif %}
 
     <parallax>
         <div class="parallax-group">
@@ -46,8 +18,11 @@
             <a class="link" href="tinflix.html">HOME</a>
             <a class="link" href="movies">MOVIES</a>
             <a class="link" href="#column_background">CONTACT</a>
-            <a class="link" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">LOGIN</a>
-            <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" style="text-decoration:none"></a>
+                {% if not user or user.is_anonymous %}
+                    <a class="link" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">LOGIN</a>
+                {% else %}
+                    <a class="link" href="{% url 'auth:logout' %}?next={{ request.path }}">LOGOUT</a>
+                {% endif %}
             </nav>
         </menu>
             <header class="front1">

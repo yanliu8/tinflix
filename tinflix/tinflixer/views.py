@@ -21,8 +21,8 @@ def index(request):
                               'user': request.user,
                               'tinflixer': obj})
     if obj.new:
-        # request.user.new = False
-
+        obj.new = False
+        obj.save()
         return redirect("/signup", tinflixer=obj)
     return render_to_response("mainpage.html", context)
 
@@ -43,7 +43,7 @@ def signup(request):
                              {'request': request,
                               'user': request.user,
                               'tinflixer': obj})
-    return render(request, "test_signup.html", context)
+    return render(request, "signup.html", context)
 
 
 def recommendation(request):
