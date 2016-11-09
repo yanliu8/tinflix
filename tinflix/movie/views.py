@@ -86,6 +86,4 @@ def like_by_search(request):
 
 
 def index(request):
-    context = RequestContext(request,
-                             {'request': request, })
-    return render(request, 'moviePage.html', context)
+    return render(request, 'moviePage.html', {'request': request})
