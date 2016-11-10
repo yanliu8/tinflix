@@ -72,7 +72,7 @@ def search(request):
                 movies.append({"movie": movie_obj, "like": True})
             else:
                 movies.append({"movie": movie_obj, "like": False})
-        return render(request, 'search.html', {'request': request, 'movies': movies})
+        return render(request, 'search.html', {'movies': movies})
 
 
 @ajax
@@ -87,6 +87,16 @@ def like_by_search(request):
     else:
         new_like = Liked_Movie(user=user, movie=movie)
         new_like.save()
+
+
+@login_required
+def like_history(request):
+    tinflixer = Tinflixer.objects.get(user=request.user)
+    result = Liked_Movie.objects.filter(user=tinflixer)
+    movies = []
+    for like in result:
+        movies.append({"movie": like.movie, "like": True})
+    return render(request, 'search.html', {'movies': movies})
 
 
 def index(request):
