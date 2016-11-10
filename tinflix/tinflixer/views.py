@@ -3,16 +3,19 @@ from django.template.context import RequestContext
 from tinflixer.models import Tinflixer
 from tinflixer.models import Liked_Movie
 from movie.models import Similar
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from movie.models import Movie
 import omdb
 import requests
+
+
 # Create your views here.
 
 def index(request):
     context = RequestContext(request,
-                             {'request' : request,
-                              'user' : request.user})
+                             {'request': request,
+                              'user': request.user})
     if not request.user or not request.user.is_authenticated():
         return render_to_response("mainpage.html", context)
     obj = Tinflixer.objects.get(user=request.user)
@@ -27,10 +30,13 @@ def index(request):
     return render_to_response("mainpage.html", context)
 
 
+@login_required
 def signup(request):
     if request.method == 'POST':
         tinflixer_obj = Tinflixer.objects.get(user=request.user)
         tinflixer_obj.city = request.POST.get('city')
+        tinflixer_obj.first_name = request.POST.get('first_name')
+        tinflixer_obj.last_name = request.POST.get('last_name')
         tinflixer_obj.state = request.POST.get('state')
         tinflixer_obj.real_age = request.POST.get('age')
         tinflixer_obj.email = request.POST.get('email')
@@ -39,11 +45,25 @@ def signup(request):
         tinflixer_obj.save()
         return redirect("/")
     obj = Tinflixer.objects.get(user=request.user)
-    context = RequestContext(request,
-                             {'request': request,
-                              'user': request.user,
-                              'tinflixer': obj})
-    return render(request, "signup.html", context)
+    return render(request, "signup.html", {'tinflixer': obj})
+
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        tinflixer_obj = Tinflixer.objects.get(user=request.user)
+        tinflixer_obj.first_name = request.POST.get('first_name')
+        tinflixer_obj.last_name = request.POST.get('last_name')
+        # tinflixer_obj.city = request.POST.get('city')
+        # tinflixer_obj.state = request.POST.get('state')
+        tinflixer_obj.real_age = request.POST.get('age')
+        # tinflixer_obj.email = request.POST.get('email')
+        # tinflixer_obj.gender = request.POST.get('gender')
+        # tinflixer_obj.about_me = request.POST.get('about_me')
+        tinflixer_obj.save()
+        return redirect("/profile")
+    obj = Tinflixer.objects.get(user=request.user)
+    return render(request, "members.html", {'tinflixer': obj})
 
 
 def recommendation(request):
