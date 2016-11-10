@@ -48,15 +48,19 @@ def search(request):
             movie_obj = Movie(name=name)
             ret = get_movie_detail(name, movie_obj)
             if not ret:
-                movie_obj.delete()
                 result = None
             else:
                 result = [ret]
         updated = False
+        if not result:
+            return render(request, "search.html", {'movies': None})
         for obj in result:
-            print(obj.rating)
             if obj.rating == "N/A":
                 obj.rating = "0.0"
+                obj.save()
+                updated = True
+            if obj.poster == "N/A":
+                obj.poster = None
                 obj.save()
                 updated = True
         if updated:

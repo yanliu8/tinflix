@@ -1,8 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>search</title>
+{% extends 'movie_base.html' %}
+{% load static %}
+{% block content %}
+<body>
+<div class="space2">
+    <div style="width:1000px;margin:80px auto;">
+{% if movies %}
+    {% for movie_obj in movies %}
+        <li class="textonred">
+            movie name : {{ movie_obj.movie.name }}
+</li>
+        <li class="textonred">
+            plot : {{ movie_obj.movie.plot }}
+</li>
+        <li class="textonred">
+            duration : {{ movie_obj.movie.duration }}
+</li>
+        <li class="textonred">
+            rating : {{ movie_obj.movie.rating }}
+</li>
+
+        <li class="textonred">
+            genre : {{ movie_obj.movie.genre }}
+</li>
+        <li class="textonred">
+            release date : {{ movie_obj.movie.release_date }}
+        </li>
+        <div>
+            {% if movie_obj.movie.poster %}
+                <img src="{{ movie_obj.movie.poster }}" alt="cannot open poster">
+            {% else %}
+                <img src="{% static 'empty_poster.jpg' %}" style="width:300px;height:380px;">
+            {% endif %}
+        </div>
+        <div>
+            {% csrf_token %}
+            {% if not movie_obj.like %}
+                <button type="button" id="{{ movie_obj.movie.movie_id }}" onclick="like(this.id)">like</button>
+            {% else %}
+                <button type="button" id="{{ movie_obj.movie.movie_id }}" onclick="like(this.id)">dislike</button>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% else %}
+    <div class="textonred">
+        movie not found
+    </div>
+{% endif %}
+    </div>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript">
         function like(id) {
@@ -25,48 +69,6 @@
             return false;
         }
     </script>
-</head>
-<body>
-{% if movies %}
-    {% for movie_obj in movies %}
-<li>
-    movie name = {{ movie_obj.movie.name }}
-</li>
-<li>
-    plot = {{ movie_obj.movie.plot }}
-</li>
-<li>
-    duration = {{ movie_obj.movie.duration }}
-</li>
-<li>
-    rating = {{ movie_obj.movie.rating }}
-</li>
-
-<li>
-    genre = {{ movie_obj.movie.genre }}
-</li>
-        <li>
-            release date = {{ movie_obj.movie.release_date }}
-        </li>
-        <li>
-            popularity = {{ movie_obj.movie.popularity }}
-        </li>
-<li>
-    <img src="{{ movie_obj.movie.poster }}" alt="No poster">
-</li>
-        <li>
-            {% csrf_token %}
-            {% if not movie_obj.like %}
-                <button type="button" id="{{ movie_obj.movie.movie_id }}" onclick="like(this.id)">like</button>
-            {% else %}
-                <button type="button" id="{{ movie_obj.movie.movie_id }}" onclick="like(this.id)">dislike</button>
-            {% endif %}
-        </li>
-    {% endfor %}
-{% else %}
-    <li>
-        movie not found
-    </li>
-{% endif %}
+</div>
 </body>
-</html>
+{% endblock %}

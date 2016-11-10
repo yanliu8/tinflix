@@ -1,81 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>movies</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{% extends 'movie_base.html' %}
+{% block content %}
+    <div class="space">
     <link href="static/ninja-slider.css" rel="stylesheet" />
     <script src="static/ninja-slider.js"></script>
     <link href="static/thumbnail-slider.css" rel="stylesheet" type="text/css" />
     <script src="static/thumbnail-slider.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="static/movietemplate.css">
-    <link rel="stylesheet" href="static/searchbar.css">
-    <style>
-        body {font: normal 0.9em Arial;color:#222;}
-        header {display:block; font-size:1.2em;margin-bottom:100px;}
-        header a, header span {
-            display: inline-block;
-            padding: 4px 8px;
-            margin-right: 10px;
-            border: 2px solid #000;
-            background: #DDD;
-            color: #000;
-            text-decoration: none;
-            text-align: center;
-            height: 20px;
-        }
-        header span {background:white;}
-        a {color: #1155CC;}
-    </style>
-</head>
-    <h1>Search the movie you like</h1>
-    <body>
-    <div class="search">
-     <div id="tfheader">
-		<form id="tfnewsearch" method="get" action="movie/search">
-		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="search" class="tfbutton">
-		</form>
-	   <div class="tfclear"></div>
-	</div>
-        </div>
-
-        <menu>
-            <nav id="nav">
-            <a class="link" href="tinflix.html">HOME</a>
-            <a class="link" href="movies">MOVIES</a>
-            <a class="link" href="../../tinflixer/templates/members.html">MEMBERS</a>
-            <a class="link" href="#column_background">CONTACT</a>
-                <!-- {% if not user or user.is_anonymous %}-->
-                    <a class="link" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">LOGIN</a>
-                <!-- {% else %}-->
-                    <!-- <a class="link" href="{% url 'auth:logout' %}?next={{ request.path }}">LOGOUT</a>-->
-                <!-- {% endif %}-->
-            </nav>
-        </menu>
-
-        <div class="space">
-        </div>
-
-
-
-
-<body>
     <!--start-->
     <div style="width:1000px;margin:80px auto;">
         <div id="ninja-slider" style="float:left;">
             <div class="slider-inner">
                 <ul>
-                    <li><a class="ns-img" href="img/1.jpg"></a></li>
-                    <li><a class="ns-img" href="img/2.jpg"></a></li>
-                    <li><a class="ns-img" href="img/3.jpg"></a></li>
-                    <li><a class="ns-img" href="img/4.jpg"></a></li>
-                    <li><a class="ns-img" href="img/5.jpg"></a></li>
-                    <li><a class="ns-img" href="img/6.jpg"></a></li>
-                    <li><a class="ns-img" href="img/7.jpg"></a></li>
-                    <li><a class="ns-img" href="img/8.jpg"></a></li>
-                    <li><a class="ns-img" href="img/9.jpg"></a></li>
-                    <li><a class="ns-img" href="img/10.jpg"></a></li>
-                    <li><a class="ns-img" href="img/11.jpg"></a></li>
-                    <li><a class="ns-img" href="img/12.jpg"></a></li>
+                    <li><a class="ns-img" href="static/1.jpg"></a></li>
+                    <li><a class="ns-img" href="static/2.jpg"></a></li>
+                    <li><a class="ns-img" href="static/3.jpg"></a></li>
+                    <li><a class="ns-img" href="static/4.jpg"></a></li>
+                    <li><a class="ns-img" href="static/5.jpg"></a></li>
+                    <li><a class="ns-img" href="static/6.jpg"></a></li>
+                    <li><a class="ns-img" href="static/7.jpg"></a></li>
+                    <li><a class="ns-img" href="static/8.jpg"></a></li>
+                    <li><a class="ns-img" href="static/9.jpg"></a></li>
+                    <li><a class="ns-img" href="static/10.jpg"></a></li>
+                    <li><a class="ns-img" href="static/11.jpg"></a></li>
+                    <li><a class="ns-img" href="static/12.jpg"></a></li>
                 </ul>
                 <div class="fs-icon" title="Expand/Close"></div>
             </div>
@@ -84,36 +30,37 @@
             <div class="inner">
                 <ul>
                     <li>
-                        <a class="thumb" href="img/1.jpg"></a>
+                        <a class="thumb" href="static/1.jpg"></a>
                     </li>
                     <li>
-                        <a class="thumb" href="img/2.jpg"></a>
+                        <a class="thumb" href="static/2.jpg"></a>
                     </li>
                     <li>
-                        <a class="thumb" href="img/3.jpg"></a>
+                        <a class="thumb" href="static/3.jpg"></a>
                     </li>
                     <li>
-                        <a class="thumb" href="img/4.jpg"></a>
+                        <a class="thumb" href="static/4.jpg"></a>
                     </li>
                     <li>
-                        <a class="thumb" href="img/5.jpg"></a>
+                        <a class="thumb" href="static/5.jpg"></a>
                     </li>
                     <li>
-                        <a class="thumb" href="img/6.jpg"></a>
+                        <a class="thumb" href="static/6.jpg"></a>
                     </li>
                     <li>
-                        <a class="thumb" href="img/7.jpg"></a>
+                        <a class="thumb" href="static/7.jpg"></a>
                     </li>
                     <li>
-                        <a class="thumb" href="img/8.jpg"></a>
+                        <a class="thumb" href="static/8.jpg"></a>
                     </li>
                     <li>
-                        <a class="thumb" href="img/9.jpg"></a>
+                        <a class="thumb" href="static/9.jpg"></a>
                     </li>
                 </ul>
             </div>
         </div>
         <div style="clear:both;"></div>
     </div>
-</body>
-</html>
+
+    </div>
+{% endblock %}

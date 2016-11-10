@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>movies</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="{% static 'movietemplate.css' %}">
+    <link rel="stylesheet" href="{% static 'searchbar.css' %}">
+    <style>
+        body {
+            font: normal 0.9em Arial;
+            color: #222;
+        }
+
+        header {
+            display: block;
+            font-size: 1.2em;
+            margin-bottom: 100px;
+        }
+
+        header a, header span {
+            display: inline-block;
+            padding: 4px 8px;
+            margin-right: 10px;
+            border: 2px solid #000;
+            background: #DDD;
+            color: #000;
+            text-decoration: none;
+            text-align: center;
+            height: 20px;
+        }
+
+        header span {
+            background: white;
+        }
+
+        a {
+            color: #1155CC;
+        }
+    </style>
+</head>
+<h1>Search the movie you like</h1>
+<body>
+<div class="search">
+    <div id="tfheader">
+        <form id="tfnewsearch" method="get" action="/movie/search">
+            <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit"
+                                                                                             value="search"
+                                                                                             class="tfbutton">
+        </form>
+        <div class="tfclear"></div>
+    </div>
+</div>
+
+<menu>
+    <nav id="nav">
+        <a class="link" href="/">HOME</a>
+        <a class="link" href="/movies">MOVIES</a>
+        <a class="link" href="/profile">MEMBERS</a>
+        <a class="link" href="#column_background">CONTACT</a>
+        {% if not user or user.is_anonymous %}
+            <a class="link" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">LOGIN</a>
+        {% else %}
+            <a class="link" href="{% url 'auth:logout' %}?next={{ request.path }}">LOGOUT</a>
+        {% endif %}
+    </nav>
+</menu>
+
+
+{% block content %}
+{% endblock %}
+</body>
+</html>

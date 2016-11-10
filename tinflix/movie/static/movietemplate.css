@@ -1,6 +1,6 @@
 body{
     background-size: 100% 100%;
-    background-image: url("background3.JPG");
+    background-image: url("/static/background3.JPG");
     background-repeat: no-repeat;
     background-color: #330000;
     background-attachment: fixed;
@@ -66,4 +66,17 @@ nav {
     margin-left: -20px;
     margin-top: -20px;
     padding-top: 600px;
+}
+
+.space2 {
+    background-color: #330000;
+    width: 110%;
+    margin-left: -20px;
+    margin-top: -20px;
+    padding-top: 0px;
+}
+
+.textonred {
+    color: white;
+
 }
