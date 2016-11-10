@@ -2,27 +2,28 @@
 <html>
     <head>
         <meta charset="utf"/>
-        <title> tinflix</title>
+        <title>tinflix</title>
         <link rel="stylesheet" href="static/template.css"/>
         <link rel="stylesheet" href="static/parallax.css"/>
         <link rel="stylesheet" href="static/imgeff.css"/>
     </head>
 
-
+<body>
     <parallax>
         <div class="parallax-group">
             <img class="back1" src="static/background1.jpg" alt="">
             <h1>Tinder & Netflix</h1>
         <menu>
             <nav id="nav">
-            <a class="link" href="tinflix.html">HOME</a>
-            <a class="link" href="movies">MOVIES</a>
+            <a class="link" href="mainpage.html">HOME</a>
+            <a class="link" href="../../movie/templates/moviePage.html">MOVIES</a>
+            <a class="link" href="../../tinflixer/templates/members.html">MEMBERS</a>
             <a class="link" href="#column_background">CONTACT</a>
                 {% if not user or user.is_anonymous %}
                     <a class="link" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">LOGIN</a>
                 {% else %}
                     <a class="link" href="{% url 'auth:logout' %}?next={{ request.path }}">LOGOUT</a>
-                {% endif %}
+                <{% endif %}
             </nav>
         </menu>
             <header class="front1">
@@ -100,5 +101,6 @@
         </div>
 
         </gallery-right>
+    </body>
 
 </html>

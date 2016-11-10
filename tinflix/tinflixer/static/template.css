@@ -28,11 +28,14 @@ h1 {
 }
 
 nav {
-    padding: 40px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-right: 40px;
+    padding-left: 62px;
     text-align: center;
     font-family: arial black;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-    word-spacing: 30px;
+    word-spacing: 10px;
     font-weight: 800;
 }
 
@@ -49,13 +52,13 @@ nav {
   color: #ffffff;
   font-size: 20px;
   text-decoration: none;
-  padding: 0 80px;
+  padding: 0 20px;
   margin: 0 10px;
 }
 .link:hover {
   background-color: #ffffff;
   color: #330000;
-  padding: 40px 80px;
+  padding: 40px 20px;
 }
 
 #login ul {
@@ -109,6 +112,6 @@ text-align: right;
     width:110%;
     height: 110%;
     position: absolute;
-    top: -5%px;
-    left: -5%px;
+    top: -5px;
+    left: -5px;
 }

@@ -1,11 +1,17 @@
 	#tfheader{
-		background-color:#330000;
-		    opacity: 0.75;
+		    background: #330000;
+    opacity: 0.75;
+    margin-top: -130px;
+    width: 100%;
+    padding: 30px 0px 30px 0px;
+    font-size: 200%;
+    font-family: arial black;
+    text-align: center;
+    color: white;
 	}
 	#tfnewsearch{
-		float:right;
-		position: relative;
-		top: 20px;
+        margin-top: 10px;
+        z-index: 10;
 	}
 	.tftextinput{
 		margin: 0;
