@@ -29,33 +29,30 @@
     
     <div class="card">
 			<div class="profile">
-				<img src="http://f.cl.ly/items/0z1w0L092q070Q180K3p/36a9325cb67f11e18bb812313804a181_7.jpeg">
+                <img src="{{ tinflixer.picture }}">
 			</div>
-			<div class="name"><p><a href="#">Cole Townsend</a></p></div>
-			
-			<form action="action_page.php">
+        <div class="name"><p><a>{{ tinflixer.first_name }} {{ tinflixer.last_name }}</a></p></div>
+
+        <form action="/profile">
 			<div class="infoForm">
  			 <div class="b">First name:</div><br>
- 			 <input type="text" name="firstname" value="Firstname">
+                <input type="text" name="first_name" value="{{ tinflixer.first_name }}">
  			 <br><br>
-			
- 			 <div class="b">Birthday:</div><br>
- 			 <input type="text" name="birthday" value="mm/dd/yyyy">
+
+                <div class="b">Real Age:</div>
+                <br>
+                <input type="text" name="age" value="{{ tinflixer.real_age }}">
  			 <br><br>
 			
  			 <div class="b">Gender:</div><br>
- 			 <input type="text" name="gender" value="Gender">
- 			 <br><br>
-			
- 			 <div class="b">Phone number:</div><br>
- 			 <input type="text" name="birthday" value="phone number">
+                <input type="text" name="gender" value="{{ tinflixer.gender }}">
  			 <br><br>
  			 
  			</div>
 			<div class="infoForm2">
  			 
  			 <div class="b">Last name:</div><br>
- 			 <input type="text" name="lastname" value="Lastname">
+                <input type="text" name="last_name" value="{{ tinflixer.last_name }}">
  			 <br><br>
  			 
  			 <div class="b">Address:</div><br>

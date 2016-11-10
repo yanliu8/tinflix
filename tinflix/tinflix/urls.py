@@ -29,5 +29,6 @@ urlpatterns = [
     url('^movies$', movie.views.index),
     url('^movie/ajax/like$', movie.views.like_by_search),
     url('^movie/search', movie.views.search),
+    url('^profile', tinflixer.views.profile)
                ]
 urlpatterns += staticfiles_urlpatterns()
