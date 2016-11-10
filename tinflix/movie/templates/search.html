@@ -40,6 +40,11 @@
                 <button type="button" id="{{ movie_obj.movie.movie_id }}" onclick="like(this.id)">dislike</button>
             {% endif %}
         </div>
+        <div class="textonred">
+            Users who also liked this movie
+        </div>
+        <br>
+        <br>
     {% endfor %}
 {% else %}
     <div class="textonred">
