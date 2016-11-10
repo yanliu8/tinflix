@@ -52,13 +52,13 @@ nav {
   color: #ffffff;
   font-size: 20px;
   text-decoration: none;
-  padding: 0 20px;
+  padding: 0 60px;
   margin: 0 10px;
 }
 .link:hover {
   background-color: #ffffff;
   color: #330000;
-  padding: 40px 20px;
+  padding: 40px 60px;
 }
 
 #login ul {
