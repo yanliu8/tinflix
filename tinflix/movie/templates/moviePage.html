@@ -1,5 +1,6 @@
 {% extends 'movie_base.html' %}
 {% block content %}
+    {% load static %}
     <div class="space">
     <link href="static/ninja-slider.css" rel="stylesheet" />
     <script src="static/ninja-slider.js"></script>
@@ -10,18 +11,13 @@
         <div id="ninja-slider" style="float:left;">
             <div class="slider-inner">
                 <ul>
-                    <li><a class="ns-img" href="static/1.jpg"></a></li>
-                    <li><a class="ns-img" href="static/2.jpg"></a></li>
-                    <li><a class="ns-img" href="static/3.jpg"></a></li>
-                    <li><a class="ns-img" href="static/4.jpg"></a></li>
-                    <li><a class="ns-img" href="static/5.jpg"></a></li>
-                    <li><a class="ns-img" href="static/6.jpg"></a></li>
-                    <li><a class="ns-img" href="static/7.jpg"></a></li>
-                    <li><a class="ns-img" href="static/8.jpg"></a></li>
-                    <li><a class="ns-img" href="static/9.jpg"></a></li>
-                    <li><a class="ns-img" href="static/10.jpg"></a></li>
-                    <li><a class="ns-img" href="static/11.jpg"></a></li>
-                    <li><a class="ns-img" href="static/12.jpg"></a></li>
+                    {% for movie in recommendations %}
+                        {% if movie.poster %}
+                            <li><a class="ns-img" href="{{ movie.poster }}"></a></li>
+                        {% else %}
+                            <li><a class="ns-img" href="{% static 'empty_poster.jpg' %}"></a></li>
+                        {% endif %}
+                    {% endfor %}
                 </ul>
                 <div class="fs-icon" title="Expand/Close"></div>
             </div>
@@ -29,33 +25,15 @@
         <div id="thumbnail-slider" style="float:left;">
             <div class="inner">
                 <ul>
+                    {% for movie in recommendations %}
                     <li>
-                        <a class="thumb" href="static/1.jpg"></a>
+                        {% if not movie.poster %}
+                            <a class="thumb" href="{% static 'empty_poster.jpg' %}"></a>
+                        {% else %}
+                            <a class="thumb" href="{{ movie.poster }}"></a>
+                        {% endif %}
                     </li>
-                    <li>
-                        <a class="thumb" href="static/2.jpg"></a>
-                    </li>
-                    <li>
-                        <a class="thumb" href="static/3.jpg"></a>
-                    </li>
-                    <li>
-                        <a class="thumb" href="static/4.jpg"></a>
-                    </li>
-                    <li>
-                        <a class="thumb" href="static/5.jpg"></a>
-                    </li>
-                    <li>
-                        <a class="thumb" href="static/6.jpg"></a>
-                    </li>
-                    <li>
-                        <a class="thumb" href="static/7.jpg"></a>
-                    </li>
-                    <li>
-                        <a class="thumb" href="static/8.jpg"></a>
-                    </li>
-                    <li>
-                        <a class="thumb" href="static/9.jpg"></a>
-                    </li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>

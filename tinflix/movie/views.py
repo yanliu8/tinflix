@@ -1,6 +1,8 @@
 from __future__ import print_function
 from django.shortcuts import render
 from tinflixer.models import *
+from django.db.models import Q
+import requests
 from django_ajax.decorators import ajax
 from django.http import Http404
 from django.views.decorators.csrf import csrf_exempt
@@ -9,6 +11,8 @@ from django.template.context import RequestContext
 from movie.models import *
 import omdb
 # Create your views here.
+
+
 def stage4(request):
     movie = Movie.objects.get(name='The Jungle Book')
     context = RequestContext(request,
@@ -17,7 +21,8 @@ def stage4(request):
     return render(request, 'stage4.html', context)
 
 
-def get_movie_detail(name, movie_obj):
+def get_movie_detail(movie_obj):
+    name = movie_obj.name
     api_result = omdb.title(name)
     if not api_result:
         return None
@@ -28,11 +33,6 @@ def get_movie_detail(name, movie_obj):
     movie_obj.poster = api_result['poster'].encode('utf-8')
     movie_obj.cast_crew = api_result['actors'].encode('utf-8')
     movie_obj.genre = api_result['genre'].encode('utf-8')
-    votes = api_result['imdb_votes'].encode('utf-8').replace(',', '')
-    if votes == 'N/A':
-        movie_obj.popularity = 0
-    else:
-        movie_obj.popularity = int(votes)
     movie_obj.save()
     return movie_obj
 
@@ -46,7 +46,7 @@ def search(request):
         result = Movie.objects.filter(name__icontains=name).order_by('-rating')
         if not result.exists():
             movie_obj = Movie(name=name)
-            ret = get_movie_detail(name, movie_obj)
+            ret = get_movie_detail(movie_obj)
             if not ret:
                 result = None
             else:
@@ -100,4 +100,61 @@ def like_history(request):
 
 
 def index(request):
-    return render(request, 'moviePage.html', {'request': request})
+    user = Tinflixer.objects.get(user=request.user)
+    liked = Liked_Movie.objects.filter(user=user).order_by('-id')
+    recommendations = []
+    for liked_obj in liked:
+        movie = liked_obj.movie
+        similar = Similar.objects.filter(Q(movie_1=movie) | Q(movie_2=movie))
+        if not similar.exists():
+            params = {"q": movie.name, "type": "movie", "k": "240885-tinflixe-BDIBVZFX"}
+            try:
+                r = requests.get("https://www.tastekid.com/api/similar", params=params).json()
+            except:
+                continue
+            print(r)
+            lst = r['Similar']['Results']
+            for obj in lst:
+                name = obj['Name']
+                try:
+                    movie_obj = Movie.objects.get(name=name)
+                except Movie.DoesNotExist:
+                    api_result = omdb.title(name)
+                    if api_result:
+                        movie_obj = Movie(name=name)
+                        movie_obj.plot = api_result['plot'].encode('utf-8')
+                        movie_obj.duration = api_result['runtime'].encode('utf-8')
+                        movie_obj.release_date = api_result['released'].encode('utf-8')
+                        movie_obj.rating = api_result['imdb_rating'].encode('utf-8')
+                        movie_obj.poster = api_result['poster'].encode('utf-8')
+                        movie_obj.cast_crew = api_result['actors'].encode('utf-8')
+                        movie_obj.genre = api_result['genre'].encode('utf-8')
+                        movie_obj.save()
+                    else:
+                        continue
+                new_similar = Similar(movie_1=movie, movie_2=movie_obj)
+                new_similar.save()
+        similar = Similar.objects.filter(Q(movie_1=movie) | Q(movie_2=movie))
+        for obj in similar:
+            if obj.movie_1.movie_id == movie.movie_id:
+                if not obj.movie_2.rating:
+                    recommendations.append(get_movie_detail(obj.movie_2))
+                elif obj.movie_2.poster == 'N/A':
+                    obj.movie_2.poster = None
+                    recommendations.append(obj.movie_2)
+                else:
+                    recommendations.append(obj.movie_2)
+            else:
+                if not obj.movie_1.rating:
+                    recommendations.append(get_movie_detail(obj.movie_1))
+                elif obj.movie_1.poster == 'N/A':
+                    obj.movie_1.poster = None
+                    recommendations.append(obj.movie_1)
+                else:
+                    recommendations.append(obj.movie_1)
+        if len(recommendations) >= 10:
+            break
+    recommendations = recommendations[:10]
+    return render(request, "moviePage.html", {'request': request,
+                                              'user': request.user,
+                                              'recommendations': recommendations})
