@@ -122,14 +122,7 @@ def index(request):
                     api_result = omdb.title(name)
                     if api_result:
                         movie_obj = Movie(name=name)
-                        movie_obj.plot = api_result['plot'].encode('utf-8')
-                        movie_obj.duration = api_result['runtime'].encode('utf-8')
-                        movie_obj.release_date = api_result['released'].encode('utf-8')
-                        movie_obj.rating = api_result['imdb_rating'].encode('utf-8')
-                        movie_obj.poster = api_result['poster'].encode('utf-8')
-                        movie_obj.cast_crew = api_result['actors'].encode('utf-8')
-                        movie_obj.genre = api_result['genre'].encode('utf-8')
-                        movie_obj.save()
+                        movie_obj = get_movie_detail(movie_obj)
                     else:
                         continue
                 new_similar = Similar(movie_1=movie, movie_2=movie_obj)

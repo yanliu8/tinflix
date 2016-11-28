@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response, redirect, render
 from django.template.context import RequestContext
-from tinflixer.models import Tinflixer
+from django.db.models import Q
+from tinflixer.models import *
 from django.contrib.auth.decorators import login_required
 
 
@@ -61,4 +62,8 @@ def profile(request):
     return render(request, "members.html", {'tinflixer': obj})
 
 
-
+@login_required
+def liked_user(request):
+    user = Tinflixer.objects.get(user=request.user)
+    liked = Liked_User.objects.filter(Q(user1=user) | Q(user2_2=user))
+    return render(request, "like_user.html", {'liked': liked})

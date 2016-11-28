@@ -30,7 +30,7 @@ urlpatterns = [
     url('^movie/ajax/like$', movie.views.like_by_search),
     url('^movie/search', movie.views.search),
     url('profile', tinflixer.views.profile),
-    url('^detial', movie.views.detail),
+    # url('^detail', movie.views.detail),
     url('^like_history', movie.views.like_history)
                ]
 urlpatterns += staticfiles_urlpatterns()
