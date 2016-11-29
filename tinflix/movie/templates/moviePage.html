@@ -13,13 +13,23 @@
                 <ul>
                     {% for movie in recommendations %}
                         {% if movie.poster %}
-                            <li><a class="ns-img" href="{{ movie.poster }}"></a></li>
+                            <li>
+                                <a href="/movie/search?q={{ movie.name }}" method="get">
+                                    <span class="ns-img"
+                                          style="background-image:url({{ movie.poster }});cursor:pointer;"></span>
+                                </a>
+                            </li>
                         {% else %}
-                            <li><a class="ns-img" href="{% static 'empty_poster.jpg' %}"></a></li>
+                            <li>
+                                <a href="/">
+                                    <span class="ns-img"
+                                          style="background-image:url({% static 'empty_poster.jpg' %} );cursor:pointer;"></span>
+                                </a>
+
+                            </li>
                         {% endif %}
                     {% endfor %}
                 </ul>
-                <div class="fs-icon" title="Expand/Close"></div>
             </div>
         </div>
         <div id="thumbnail-slider" style="float:left;">
