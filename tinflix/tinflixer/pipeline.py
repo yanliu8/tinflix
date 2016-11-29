@@ -10,8 +10,10 @@ def create_tinflixer(backend, details, response,
         new_profile = Tinflixer(user=user, new=True)
         new_profile.save()
     obj = Tinflixer.objects.get(user=user)
-    obj.high_age = response['age_range']['max']
-    obj.low_age = response['age_range']['min']
+    if 'max' in response['age_range']:
+        obj.high_age = response['age_range']['max']
+    if 'min' in response['age_range']:
+        obj.low_age = response['age_range']['min']
     obj.picture = response['picture']['data']['url']
     if not obj.new:
         obj.email = details['email']
