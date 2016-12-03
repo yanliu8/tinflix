@@ -25,9 +25,10 @@
       </span>
             <a href="javascript:like('{{ u.user.email }}');" class="follow">Like</a>
   </li>
+        {% endfor %}
 </ul>
         </div>
-        {% endfor %}
+
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script type="text/javascript">
             function like(email) {
