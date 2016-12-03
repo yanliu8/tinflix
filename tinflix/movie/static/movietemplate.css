@@ -73,7 +73,15 @@ nav {
     width: 110%;
     margin-left: -20px;
     margin-top: -20px;
-    padding-top: 0px;
+    padding-top: 30px;
+}
+
+.space3 {
+    background-color: #330000;
+    width: 110%;
+    margin-left: -20px;
+    margin-top: -20px;
+    padding-top: 30px;
 }
 
 .textonred {
