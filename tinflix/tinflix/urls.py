@@ -28,6 +28,7 @@ urlpatterns = [
     url('^stage4$', movie.views.stage4),
     url('^movies$', movie.views.index),
     url('^movie/ajax/like$', movie.views.like_by_search),
+    url('^user/ajax/like$', movie.views.like_user),
     url('^movie/search', movie.views.search),
     url('profile', tinflixer.views.profile),
     # url('^detail', movie.views.detail),

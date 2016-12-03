@@ -142,19 +142,40 @@
     <ul class="img-list">
         {% for tinflixer in users %}
   <li>
-      <img src="static/1.png" width="150" height="150" />
+            <img src="{{ tinflixer.user.picture }}" width="150" height="150"/>
             <span class="text-content"><span>Age: {{ tinflixer.user.real_age }}</span>
       <span>Gender: {{ tinflixer.user.gender }}</span>
                 {% if tinflixer.relation %}
-                    <span>email: {{ tinflixer.user.email }}</span>
-                    <a href="#like_history" class="follow">Dislike</a>
+                    <span id="{{ tinflixer.user.email }}">email: {{ tinflixer.user.email }}</span>
                 {% else %}
-          <span>email: ***</span>
-                    <a href="#like_history" class="follow">Like</a>
+                    <span id="{{ tinflixer.user.email }}">email: ***</span>
+
                 {% endif %}
       </span>
+            <a href="javascript:like('{{ tinflixer.user.email }}')" class="follow">Like</a>
         {% endfor %}
 </ul>
         </div>
     </div>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function like(email) {
+            $.ajax({
+                url: "/user/ajax/like",
+                type: "POST",
+                data: ({'email': email}),
+                success: function (content) {
+                    if (content.content) {
+                        document.getElementById(email).innerText = "email: " + email;
+                    }
+                    else {
+                        document.getElementById(email).innerText = "email: ***";
+                    }
+
+
+                }
+            })
+            return false;
+        }
+    </script>
 </html>

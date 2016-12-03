@@ -100,9 +100,11 @@ def like_user(request):
         l = Liked_User.objects.get(user1=user2, user2=user1)
         l.status = True
         l.save()
+        return True
     elif not Liked_User.objects.filter(user1=user1, user2=user2).exists():
         l = Liked_User(user1=user1, user2=user2, status=False)
         l.save()
+    return False
 
 
 @login_required
@@ -133,7 +135,8 @@ def user_liked_same_movie(request):
         for l in liked:
             liked_user = Liked_User.objects.filter(Q(user1=tinflixer, user2=l.user) | Q(user1=l.user, user2=tinflixer))
             if liked_user.exists():
-                relationships.append({"user": l.user, "relation": True})
+                relationships.append({"user": l.user, "relation": Liked_User.objects.get(
+                    Q(user1=tinflixer, user2=l.user) | Q(user1=l.user, user2=tinflixer)).status})
             elif l.user != tinflixer:
                 relationships.append({"user": l.user, "relation": False})
         return render(request, 'user_likes_movie.html', {'users': relationships})
