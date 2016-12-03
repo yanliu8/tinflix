@@ -41,8 +41,8 @@ def signup(request):
         tinflixer_obj.address = request.POST.get('address')
         gmaps = googlemaps.Client(key="AIzaSyC2djR2E8beAWvvaIG49zuiWftsJqDKJNQ")
         geocode_result = gmaps.geocode(tinflixer_obj.address)
-        tinflixer_obj.latitude = geocode_result['geometry']['location']['lat']
-        tinflixer_obj.longtitude = geocode_result['geometry']['location']['lng']
+        tinflixer_obj.latitude = geocode_result[0]['geometry']['location']['lat']
+        tinflixer_obj.longtitude = geocode_result[0]['geometry']['location']['lng']
         tinflixer_obj.save()
         return redirect("/")
     obj = Tinflixer.objects.get(user=request.user)
@@ -58,9 +58,15 @@ def profile(request):
         tinflixer_obj.city = request.POST.get('city')
         tinflixer_obj.state = request.POST.get('state')
         tinflixer_obj.real_age = request.POST.get('age')
-        # tinflixer_obj.email = request.POST.get('email')
+        tinflixer_obj.email = request.POST.get('email')
         tinflixer_obj.gender = request.POST.get('gender')
-        # tinflixer_obj.about_me = request.POST.get('about_me')
+        tinflixer_obj.about_me = request.POST.get('about_me')
+        if tinflixer_obj.address != request.POST.get('address'):
+            tinflixer_obj.address = request.POST.get('address')
+            gmaps = googlemaps.Client(key="AIzaSyC2djR2E8beAWvvaIG49zuiWftsJqDKJNQ")
+            geocode_result = gmaps.geocode(tinflixer_obj.address)
+            tinflixer_obj.latitude = geocode_result[0]['geometry']['location']['lat']
+            tinflixer_obj.longtitude = geocode_result[0]['geometry']['location']['lng']
         tinflixer_obj.save()
         return redirect("/profile")
     tinflixer = Tinflixer.objects.get(user=request.user)
