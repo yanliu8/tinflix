@@ -31,6 +31,7 @@ urlpatterns = [
     url('^movie/search', movie.views.search),
     url('profile', tinflixer.views.profile),
     # url('^detail', movie.views.detail),
-    url('^like_history', movie.views.like_history)
+    url('^like_history', movie.views.like_history),
+    url('^user_recommendation/', movie.views.user_liked_same_movie)
                ]
 urlpatterns += staticfiles_urlpatterns()
