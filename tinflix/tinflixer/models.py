@@ -23,6 +23,9 @@ class Tinflixer(models.Model):
     state = models.CharField(max_length=15, blank=True, null=True)
     picture = models.URLField(blank=True, null=True)  # test empty facebook profile pic
     about_me = models.CharField(max_length=100, blank=True, null=True)
+    address = models.CharField(max_length=100, blank=True, null=True)
+    latitude = models.FloatField(default=0.0)
+    longtitude = models.FloatField(default=0.0)
 
 
 class Liked_Movie(models.Model):
@@ -33,4 +36,4 @@ class Liked_Movie(models.Model):
 class Liked_User(models.Model):
     user1 = models.ForeignKey('Tinflixer', related_name='%(app_label)s_%(class)s_user1')
     user2 = models.ForeignKey('Tinflixer', related_name='%(app_label)s_%(class)s_user2')
-    movie = models.ForeignKey('movie.Movie', related_name='%(app_label)s_%(class)s_movie')
+    status = models.BooleanField(default=False)

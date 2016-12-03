@@ -3,6 +3,7 @@ from django.template.context import RequestContext
 from django.db.models import Q
 from tinflixer.models import *
 from django.contrib.auth.decorators import login_required
+import googlemaps
 
 
 # Create your views here.
@@ -37,6 +38,11 @@ def signup(request):
         tinflixer_obj.email = request.POST.get('email')
         tinflixer_obj.gender = request.POST.get('gender')
         tinflixer_obj.about_me = request.POST.get('about_me')
+        tinflixer_obj.address = request.POST.get('address')
+        gmaps = googlemaps.Client(key="AIzaSyC2djR2E8beAWvvaIG49zuiWftsJqDKJNQ")
+        geocode_result = gmaps.geocode(tinflixer_obj.address)
+        tinflixer_obj.latitude = geocode_result['geometry']['location']['lat']
+        tinflixer_obj.longtitude = geocode_result['geometry']['location']['lng']
         tinflixer_obj.save()
         return redirect("/")
     obj = Tinflixer.objects.get(user=request.user)
@@ -55,7 +61,6 @@ def profile(request):
         # tinflixer_obj.email = request.POST.get('email')
         tinflixer_obj.gender = request.POST.get('gender')
         # tinflixer_obj.about_me = request.POST.get('about_me')
-        print tinflixer_obj.real_age
         tinflixer_obj.save()
         return redirect("/profile")
     obj = Tinflixer.objects.get(user=request.user)

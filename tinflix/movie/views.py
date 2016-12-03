@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.template.context import RequestContext
 from movie.models import *
 import omdb
+import heapq
 # Create your views here.
 
 
@@ -89,6 +90,21 @@ def like_by_search(request):
         new_like.save()
 
 
+@ajax
+@csrf_exempt
+@login_required
+def like_user(request):
+    user2 = Tinflixer.objects.get(email=request.POST['email'])
+    user1 = Tinflixer.objects.get(user=request.user)
+    if Liked_User.objects.filter(user1=user2, user2=user1).exists():
+        l = Liked_User.objects.get(user1=user2, user2=user1)
+        l.status = True
+        l.save()
+    elif not Liked_User.objects.filter(user1=user1, user2=user2).exists():
+        l = Liked_User(user1=user1, user2=user2, status=False)
+        l.save()
+
+
 @login_required
 def like_history(request):
     tinflixer = Tinflixer.objects.get(user=request.user)
@@ -99,10 +115,57 @@ def like_history(request):
     return render(request, 'search.html', {'movies': movies})
 
 
-def index(request):
-    user = Tinflixer.objects.get(user=request.user)
-    liked = Liked_Movie.objects.filter(user=user).order_by('-id')
+@login_required
+def user_liked_same_movie(request):
+    if request.method == "GET":
+        movie_name = request.GET.get('movie')
+        tinflixer = Tinflixer.objects.get(user=request.user)
+        movie_obj = Movie.objects.get(name=movie_name)
+        liked = Liked_Movie.objects.filter(movie=movie_obj)
+
+        def distance(obj):
+            return pow(pow((obj.latitude - tinflixer.latitude), 2) + pow((obj.longtitude - tinflixer.longtitude)), 0.5)
+
+        liked = heapq.nsmallest(10, liked, key=distance)
+        relationships = []
+        for l in liked:
+            liked_user = Liked_User.objects.filter(Q(user1=tinflixer, user2=l.user) | Q(user1=l.user, user2=tinflixer))
+            if liked_user.exists():
+                relationships.append({"users": l.user, "relation": True})
+            else:
+                relationships.append({"users": l.user, "relation": True})
+        return render(request, 'user_recommendation.html', {'users': relationships})
+
+
+def no_history_recommendation(request):
     recommendations = []
+    try:
+        r = requests.get("https://api.themoviedb.org/3/discover/movie",
+                         params={"popularity": "popularity.desc", "api_key": "a99cfc12c20c37ea7bdd6b610d144fb4"}).json()
+    except:
+        recommendations = []
+    results = r['results']
+    for result in results:
+        try:
+            movie_obj = Movie.objects.get(name=result['title'])
+            recommendations.append(movie_obj)
+        except Movie.DoesNotExist:
+            movie_obj = Movie(name=result['title'])
+            if get_movie_detail(movie_obj):
+                recommendations.append(movie_obj)
+            else:
+                continue
+    return render(request, "moviePage.html", {'recommendations': recommendations[:10]})
+
+
+def index(request):
+    if not request.user.is_authenticated():
+        return no_history_recommendation(request)
+    user = Tinflixer.objects.get(user=request.user)
+    recommendations = []
+    liked = Liked_Movie.objects.filter(user=user).order_by('-id')
+    if not liked.exists():
+        return no_history_recommendation(request)
     for liked_obj in liked:
         movie = liked_obj.movie
         similar = Similar.objects.filter(Q(movie_1=movie) | Q(movie_2=movie))
@@ -112,7 +175,6 @@ def index(request):
                 r = requests.get("https://www.tastekid.com/api/similar", params=params).json()
             except:
                 continue
-            print(r)
             lst = r['Similar']['Results']
             for obj in lst:
                 name = obj['Name']
@@ -132,22 +194,22 @@ def index(request):
             if obj.movie_1.movie_id == movie.movie_id:
                 if not obj.movie_2.rating:
                     recommendations.append(get_movie_detail(obj.movie_2))
-                elif obj.movie_2.poster == 'N/A':
+                elif obj.movie_2.poster == 'N/A' and obj.movie_2 not in recommendations:
                     obj.movie_2.poster = None
                     recommendations.append(obj.movie_2)
-                else:
+                elif obj.movie_2 not in recommendations:
                     recommendations.append(obj.movie_2)
             else:
                 if not obj.movie_1.rating:
                     recommendations.append(get_movie_detail(obj.movie_1))
                 elif obj.movie_1.poster == 'N/A':
                     obj.movie_1.poster = None
-                    recommendations.append(obj.movie_1)
-                else:
+                    if obj.movie_1 not in recommendations:
+                        recommendations.append(obj.movie_1)
+                elif obj.movie_1 not in recommendations:
                     recommendations.append(obj.movie_1)
         if len(recommendations) >= 10:
             break
-    recommendations = recommendations[:10]
     return render(request, "moviePage.html", {'request': request,
                                               'user': request.user,
-                                              'recommendations': recommendations})
+                                              'recommendations': recommendations[:10]})
