@@ -63,8 +63,15 @@ def profile(request):
         # tinflixer_obj.about_me = request.POST.get('about_me')
         tinflixer_obj.save()
         return redirect("/profile")
-    obj = Tinflixer.objects.get(user=request.user)
-    return render(request, "members.html", {'tinflixer': obj})
+    tinflixer = Tinflixer.objects.get(user=request.user)
+    relationships = []
+    liked_user = Liked_User.objects.filter(Q(user1=tinflixer) | Q(user2=tinflixer))
+    for l in liked_user:
+        if l.user1 == tinflixer:
+            relationships.append({"user": l.user2, "relation": l.status})
+        else:
+            relationships.append({"user": l.user1, "relation": l.status})
+    return render(request, "members.html", {'tinflixer': tinflixer, "users": relationships})
 
 
 @login_required

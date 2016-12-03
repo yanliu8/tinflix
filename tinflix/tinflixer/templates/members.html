@@ -131,39 +131,20 @@
                 <div class="gallery-box">
         <div class="wrapper">
     <ul class="img-list">
+        {% for tinflixer in users %}
   <li>
       <img src="static/1.png" width="150" height="150" />
-      <span class="text-content"><span>Age: </span>
-      <span>Gender: </span>
+            <span class="text-content"><span>Age: {{ tinflixer.user.real_age }}</span>
+      <span>Gender: {{ tinflixer.user.gender }}</span>
+                {% if tinflixer.relation %}
+                    <span>email: {{ tinflixer.user.email }}</span>
+                    <a href="#like_history" class="follow">Dislike</a>
+                {% else %}
           <span>email: ***</span>
+                    <a href="#like_history" class="follow">Like</a>
+                {% endif %}
       </span>
-
-      <a href="#like_history" class="follow">Like</a>
-  </li>
-        <li>
-      <img src="static/1.png" width="150" height="150" />
-      <span class="text-content"><span>Age: </span>
-      <span>Gender: </span>
-          <span>email: ***</span>
-      </span>
-            <a href="#like_history" class="follow">Like</a>
-  </li>
-        <li>
-      <img src="static/1.png" width="150" height="150" />
-      <span class="text-content"><span>Age: {{ tinflixer.real_age }}</span>
-      <span>Gender: </span>
-          <span>email: ***</span>
-      </span>
-            <a href="#like_history" class="follow">Like</a>
-  </li>
-        <li>
-      <img src="static/1.png" width="150" height="150" />
-      <span class="text-content"><span>Age: </span>
-      <span>Gender: </span>
-          <span>email: ***</span>
-      </span>
-            <a href="#like_history" class="follow">Like</a>
-  </li>
+        {% endfor %}
 </ul>
         </div>
     </div>

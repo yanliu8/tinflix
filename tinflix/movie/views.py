@@ -131,9 +131,9 @@ def user_liked_same_movie(request):
         for l in liked:
             liked_user = Liked_User.objects.filter(Q(user1=tinflixer, user2=l.user) | Q(user1=l.user, user2=tinflixer))
             if liked_user.exists():
-                relationships.append({"users": l.user, "relation": True})
+                relationships.append({"user": l.user, "relation": True})
             else:
-                relationships.append({"users": l.user, "relation": True})
+                relationships.append({"user": l.user, "relation": False})
         return render(request, 'user_recommendation.html', {'users': relationships})
 
 
