@@ -68,6 +68,14 @@ nav {
     padding-top: 30px;
 }
 
+.space1 {
+    background-color: #330000;
+    width: 110%;
+    margin-left: -20px;
+    margin-top: -20px;
+    padding-top: 600px;
+}
+
 .textonred {
     color: white;
 
