@@ -59,7 +59,7 @@ h2 {
     background: #330000;
 }
 
-ul {
+ul.menu {
     list-style-type: none;
     margin-top: -200px;
     margin-left: -8px;

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
 
@@ -8,25 +6,22 @@
         <link rel="stylesheet" href="static/memberstemplate.css">
         <link rel="stylesheet" href="static/membersnamecard.css">
         <link rel="stylesheet" href="static/memberlike.css">
-        <link rel="stylesheet" href="static/memberinfo.css">
     </head>
-    
-<body>
 
-<ul>
+<ul class="menu">
   <li><a class="menuimg"></a></li>
-    <li><a class="active" href="/">Home</a></li>
-  <li><a href="#news">Profile</a></li>
-  <li><a href="#contact">Check out who likes you</a></li>
-    <li><a href="/like_history">Your like history</a></li>
+  <li><a class="active" href="mainpage.html">Home</a></li>
+  <li><a href="#profile">Profile</a></li>
+  <li><a href="#like_history">Your like history</a></li>
 </ul>
+    <a name="profile"></a>
     <h1>Edit you profile and tell people somethings about your self</h1>
-    
+
     <div class="minibackground1">
-			
-			
+
+
     </div>
-    
+
     <div class="card">
 			<div class="profile">
                 <img src="{{ tinflixer.picture }}">
@@ -44,7 +39,7 @@
                 <br>
                 <input type="text" name="age" value="{{ tinflixer.real_age }}">
  			 <br><br>
-			
+
  			 <div class="b">Gender:</div><br>
                 <select class="form-dropdown" style="width:150px" id="input_14" name="gender">
                     <option value=""></option>
@@ -52,10 +47,10 @@
                     <option value="female"> female</option>
                 </select>
  			 <br><br>
- 			 
+
  			</div>
 			<div class="infoForm2">
- 			 
+
  			 <div class="b">Last name:</div><br>
                 <input type="text" name="last_name" value="{{ tinflixer.last_name }}">
  			 <br><br>
@@ -122,59 +117,54 @@
                 <br>
                 <input type="text" name="city" value="{{ tinflixer.city }}">
                 <br><br>
- 			 
+
  			 <div class="submitButton"><input type="submit" value="Submit"></div>
- 			 
+
  			</div>
- 			 
- 			 
+
+
 			</form>
 	</div>
-    
-    <likeu>
+    <a name="like_history"></a>
     <h2>Check out who likes you</h2>
-        
-        <div class="gallery-box">
-            <div class="wrapper">
-                
-                    <dic class="img-single">
-                        <img src="static/1.png">
-                        <a href="#" class="follow">Like</a>
-                    </dic>
-                    <dic class="img-single">
-                        <img src="static/1.png">
-                        <a href="#" class="follow">Like</a>
-                    </dic>
-                    <dic class="img-single">
-                        <img src="static/1.png">
-                        <a href="#" class="follow">Like</a>
-                    </dic>
-                    <dic class="img-single">
-                        <img src="static/1.png">
-                        <a href="#" class="follow">Like</a>
-                    </dic>
-                    <dic class="img-single">
-                        <img src="static/1.png">
-                        <a href="#" class="follow">Like</a>
-                    </dic>
-                    <dic class="img-single">
-                        <img src="static/1.png">
-                        <a href="#" class="follow">Like</a>
-                    </dic>
-                    <dic class="img-single">
-                        <img src="static/1.png">
-                        <a href="#" class="follow">Like</a>
-                    </dic>
-                    
-                
-                
-            </div>
-        </div>
-    </likeu>
-        
-    
 
-    
-    
-</body>
+                <div class="gallery-box">
+        <div class="wrapper">
+    <ul class="img-list">
+  <li>
+      <img src="static/1.png" width="150" height="150" />
+      <span class="text-content"><span>Age: </span>
+      <span>Gender: </span>
+          <span>email: ***</span>
+      </span>
+
+      <a href="#like_history" class="follow">Like</a>
+  </li>
+        <li>
+      <img src="static/1.png" width="150" height="150" />
+      <span class="text-content"><span>Age: </span>
+      <span>Gender: </span>
+          <span>email: ***</span>
+      </span>
+            <a href="#like_history" class="follow">Like</a>
+  </li>
+        <li>
+      <img src="static/1.png" width="150" height="150" />
+      <span class="text-content"><span>Age: {{ tinflixer.real_age }}</span>
+      <span>Gender: </span>
+          <span>email: ***</span>
+      </span>
+            <a href="#like_history" class="follow">Like</a>
+  </li>
+        <li>
+      <img src="static/1.png" width="150" height="150" />
+      <span class="text-content"><span>Age: </span>
+      <span>Gender: </span>
+          <span>email: ***</span>
+      </span>
+            <a href="#like_history" class="follow">Like</a>
+  </li>
+</ul>
+        </div>
+    </div>
 </html>
