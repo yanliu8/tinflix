@@ -18,7 +18,7 @@
             <a class="link" href="/">HOME</a>
                 <a class="link" href="/movies">MOVIES</a>
                 <a class="link" href="/profile">MEMBERS</a>
-            <a class="link" href="#column_background">CONTACT</a>
+            <a class="link" href="#about_us">CONTACT</a>
                 {% if not user or user.is_anonymous %}
                     <a class="link" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">LOGIN</a>
                 {% else %}
@@ -32,7 +32,7 @@
                 </div>
             </header>
             <div class="column_container">
-
+                <a name="about_us"></a>
                 <div class="column_left" >
                     <h2>ABOUT US</h2>
                     <p>I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double click me to add your own content and make changes to the font. I’m a great place for you to tell a story and let your users know a little more about you.</p>

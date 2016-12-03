@@ -1,0 +1,110 @@
+.wrapper{
+    width: 100%;
+    margin: 0 auto;
+}
+
+.img-single{
+    width: 160px;
+    height: 180px;
+    margin: 30px 65px;
+    float: left;
+}
+
+.img-single img{
+    width: 100%;
+    height: 100%;
+}
+
+.follow {
+  border-color: #2980b9;
+  color: #2980b9;
+}
+
+ul.img-list {
+  list-style-type: none;
+  margin: 0;
+    background: #330000;
+
+}
+
+ul.img-list li {
+  display: inline-block;
+    margin: 30px 60px;
+  position: relative;
+}
+
+
+span.text-content {
+  background: rgba(0,0,0,0.5);
+  color: white;
+  cursor: pointer;
+  display: table;
+  height: 150px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 150px;
+}
+
+span.text-content span {
+  display:table-row;
+  text-align:center;
+  vertical-align: middle;
+}
+
+span.text-content {
+  background: rgba(0,0,0,0.5);
+  color: white;
+  cursor: pointer;
+  display: table;
+  height: 150px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 150px;
+  opacity: 0;
+}
+
+ul.img-list li:hover span.text-content {
+  opacity: 1;
+}
+
+
+span.text-content {
+  background: rgba(0,0,0,0.5);
+  color: white;
+  cursor: pointer;
+  display: table;
+  height: 150px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 150px;
+  opacity: 0;
+  -webkit-transition: opacity 500ms;
+  -moz-transition: opacity 500ms;
+  -o-transition: opacity 500ms;
+  transition: opacity 500ms;
+}
+
+li a {
+    font-family: arial black;
+    display: block;
+    color: white;
+    padding: 2px 0px;
+    text-decoration: none;
+    text-align: center;
+}
+
+li a.menuimg {
+}
+
+li a.active {
+    background-color: #330000;
+    color: white;
+}
+
+li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}

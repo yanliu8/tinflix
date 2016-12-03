@@ -57,7 +57,6 @@
         <a class="link" href="/">HOME</a>
         <a class="link" href="/movies">MOVIES</a>
         <a class="link" href="/profile">MEMBERS</a>
-        <a class="link" href="#column_background">CONTACT</a>
         {% if not user or user.is_anonymous %}
             <a class="link" href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">LOGIN</a>
         {% else %}
