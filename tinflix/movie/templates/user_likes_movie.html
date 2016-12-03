@@ -1,60 +1,33 @@
 <!DOCTYPE html>
 <html>
+{% load static %}
     <head>
         <title>user who likes this movie</title>
-        <link rel="stylesheet" href="static/user_likes_movie.css">
+        <link rel="stylesheet" href="{% static "user_likes_movie.css" %}">
     </head>
 
     <body bgcolor="#330000">
         <div class="wrapper">
     <ul class="img-list">
 
-        <div class="aboutme"></div>
-  <li>
-      <img src="../tinflix/static/1.png" width="150" height="150" />
-      <span class="text-content"><span>Age: </span>
-      <span>Gender: </span>
-          <span>email: ***</span>
-      </span>
 
-      <a href="#like_history" class="follow">Like</a>
-  </li>
-
-
-
-
-
-        <div class="aboutme"></div>
+        {% for u in users %}
+            <div class="aboutme"><p>{{ u.user.about_me }} </p></div>
         <li>
-      <img src="../tinflix/static/1.png" width="150" height="150" />
-      <span class="text-content"><span>Age: </span>
-      <span>Gender: </span>
+            <img src="{{ u.user.picture }}" width="150" height="150"/>
+            <span class="text-content"><span>Age: {{ u.user.real_age }}</span>
+      <span>Gender: {{ u.user.gender }}</span>
+                {% if u.relation %}
+                    <span>email:{{ u.user.email }}</span>
+                {% else %}
           <span>email: ***</span>
-      </span>
-            <a href="#like_history" class="follow">Like</a>
-  </li>
-
-        <div class="aboutme"></div>
-        <li>
-      <img src="../tinflix/static/1.png" width="150" height="150" />
-      <span class="text-content"><span>Age: </span>
-      <span>Gender: </span>
-          <span>email: ***</span>
-      </span>
-            <a href="#like_history" class="follow">Like</a>
-  </li>
-
-        <div class="aboutme"><p>I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double click me to add your own content and make changes to the font. I’m a great place for you to tell a story and let your users know a little more about you.I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double click me to add your own content and make changes to the font. I’m a great place for you to tell a story and let your users know a little more about you.I'm a paragraph. Click here </p></div>
-        <li>
-      <img src="../tinflix/static/1.png" width="150" height="150" />
-      <span class="text-content"><span>Age: </span>
-      <span>Gender: </span>
-          <span>email: ***</span>
+                {% endif %}
       </span>
             <a href="#like_history" class="follow">Like</a>
   </li>
 </ul>
         </div>
+        {% endfor %}
 
     </body>
 
