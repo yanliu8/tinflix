@@ -8,39 +8,18 @@
     <body bgcolor="#330000">
         <div class="wrapper">
     <ul class="img-list">
+        {% for u in users %}
   <li>
-      <img src="../tinflix/static/1.png" width="150" height="150" />
-      <span class="text-content"><span>Age: </span>
-      <span>Gender: </span>
+      <img src="{{ u.user.picture }}" width="150" height="150"/>
+      <span class="text-content"><span>Age: {{ u.user.real_age }}</span>
+      <span>Gender: {{ u.user.gender }}</span>
           <span>email: ***</span>
       </span>
 
       <a href="#like_history" class="follow">Like</a>
   </li>
-        <li>
-      <img src="../tinflix/static/1.png" width="150" height="150" />
-      <span class="text-content"><span>Age: </span>
-      <span>Gender: </span>
-          <span>email: ***</span>
-      </span>
-            <a href="#like_history" class="follow">Like</a>
-  </li>
-        <li>
-      <img src="../tinflix/static/1.png" width="150" height="150" />
-      <span class="text-content"><span>Age: </span>
-      <span>Gender: </span>
-          <span>email: ***</span>
-      </span>
-            <a href="#like_history" class="follow">Like</a>
-  </li>
-        <li>
-      <img src="../tinflix/static/1.png" width="150" height="150" />
-      <span class="text-content"><span>Age: </span>
-      <span>Gender: </span>
-          <span>email: ***</span>
-      </span>
-            <a href="#like_history" class="follow">Like</a>
-  </li>
+        {% endfor %}
+
 </ul>
         </div>
 

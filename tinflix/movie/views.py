@@ -124,7 +124,9 @@ def user_liked_same_movie(request):
         liked = Liked_Movie.objects.filter(movie=movie_obj)
 
         def distance(obj):
-            return pow(pow((obj.latitude - tinflixer.latitude), 2) + pow((obj.longtitude - tinflixer.longtitude)), 0.5)
+            return pow(
+                pow(obj.user.latitude - tinflixer.latitude, 2) + pow(obj.user.longtitude - tinflixer.longtitude, 2)
+                , 0.5)
 
         liked = heapq.nsmallest(10, liked, key=distance)
         relationships = []
@@ -132,9 +134,9 @@ def user_liked_same_movie(request):
             liked_user = Liked_User.objects.filter(Q(user1=tinflixer, user2=l.user) | Q(user1=l.user, user2=tinflixer))
             if liked_user.exists():
                 relationships.append({"user": l.user, "relation": True})
-            else:
+            elif l.user != tinflixer:
                 relationships.append({"user": l.user, "relation": False})
-        return render(request, 'user_recommendation.html', {'users': relationships})
+        return render(request, 'user_likes_movie.html', {'users': relationships})
 
 
 def no_history_recommendation(request):
