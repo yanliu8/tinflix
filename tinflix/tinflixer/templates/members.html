@@ -143,8 +143,10 @@
         {% for tinflixer in users %}
   <li>
             <img src="{{ tinflixer.user.picture }}" width="150" height="150"/>
-            <span class="text-content"><span>Age: {{ tinflixer.user.real_age }}</span>
-      <span>Gender: {{ tinflixer.user.gender }}</span>
+            <span class="text-content">
+                <span>{{ tinflixer.first_name }} {{ tinflixer.last_name }}</span>
+                <span>Age: {{ tinflixer.user.real_age }}</span>
+                <span>Gender: {{ tinflixer.user.gender }}</span>
                 {% if tinflixer.relation %}
                     <span id="{{ tinflixer.user.email }}">email: {{ tinflixer.user.email }}</span>
                 {% else %}

@@ -16,12 +16,8 @@
         <li>
             <img src="{{ u.user.picture }}" width="150" height="150"/>
             <span class="text-content"><span>Age: {{ u.user.real_age }}</span>
+                <span>{{ u.user.first_name }} {{ u.user.last_name }}</span>
       <span>Gender: {{ u.user.gender }}</span>
-                {% if u.relation %}
-                    <span id="{{ u.user.email }}">email:{{ u.user.email }}</span>
-                {% else %}
-                    <span id="{{ u.user.email }}">email: ***</span>
-                {% endif %}
       </span>
             <a href="javascript:like('{{ u.user.email }}');" class="follow">Like</a>
   </li>
@@ -37,14 +33,6 @@
                     type: "POST",
                     data: ({'email': email}),
                     success: function (content) {
-                        if (content.content) {
-                            document.getElementById(email).innerText = "email: " + email;
-                        }
-                        else {
-                            document.getElementById(email).innerText = "email: ***";
-                        }
-
-
                     }
                 })
                 return false;

@@ -96,6 +96,7 @@ def like_by_search(request):
 def like_user(request):
     user2 = Tinflixer.objects.get(email=request.POST['email'])
     user1 = Tinflixer.objects.get(user=request.user)
+    print(user1.email)
     if Liked_User.objects.filter(user1=user2, user2=user1).exists():
         l = Liked_User.objects.get(user1=user2, user2=user1)
         l.status = True
